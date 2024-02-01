@@ -14,9 +14,6 @@ set(HEADERS
     include/proc.hpp
 )
 
-# Set the output directory for the built executable
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 # Add the executable target
 add_executable(${PROJECT_NAME} ${SOURCES})
 

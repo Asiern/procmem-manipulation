@@ -60,3 +60,23 @@ uintptr_t ProcUtils::GetModuleBaseAddress(DWORD procId, const wchar_t *modName)
     CloseHandle(hSnap); // Close the snapshot handle to avoid memory leaks
     return modBaseAddr;
 }
+
+void ProcUtils::EnumModules(DWORD procId)
+{
+    // Create a snapshot of the process
+    HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, procId);
+    if (hSnap != INVALID_HANDLE_VALUE)
+    {
+        MODULEENTRY32W modEntry; // Module entry
+        modEntry.dwSize = sizeof(modEntry);
+        if (Module32FirstW(hSnap, &modEntry))
+        {
+            do
+            {
+                std::wcout << modEntry.szModule << std::endl;
+            } while (Module32NextW(hSnap, &modEntry));
+        }
+    }
+
+    CloseHandle(hSnap); // Close the snapshot handle to avoid memory leaks
+}

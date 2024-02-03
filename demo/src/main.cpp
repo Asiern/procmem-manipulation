@@ -4,7 +4,19 @@
 
 int main(int argc, char const *argv[])
 {
-    DWORD pid = ProcUtils::GetProcId(L"Task Manager");
-    std::cout << "PID: " << pid << std::endl;
+    // ------------------------------------------------
+    // --- Process Info
+    // ------------------------------------------------
+
+    // ------------------------------------------------
+    // --- Simple Memory Read/Write
+    // ------------------------------------------------
+
+
+    // ------------------------------------------------
+    // --- Instruction Modification
+    // --- Documentation: https://en.wikipedia.org/wiki/X86_instruction_listings
+    // ------------------------------------------------
+
     return 0;
 }

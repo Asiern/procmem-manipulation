@@ -16,6 +16,8 @@ public:
     T readMem(uintptr_t addr);
     template <typename T>
     void writeMem(uintptr_t addr, T val);
+    HANDLE getHandle() { return this->hProcess; }
+    void patch(uintptr_t addr, BYTE *instruction, size_t size);
 };
 
 /**

@@ -22,3 +22,21 @@ MemUtils::~MemUtils()
     // Close the process handle
     CloseHandle(this->hProcess);
 }
+
+/**
+ * @brief Patch an instruction in the target process modifying the write protection of the memory region
+ *
+ * @param addr Target address
+ * @param instruction New instruction
+ * @param size Size of the new instruction
+ */
+void MemUtils::patch(uintptr_t addr, BYTE *instruction, size_t size)
+{
+    DWORD oldProtect;
+    // Change the protection of the memory region to allow writing
+    VirtualProtectEx(this->hProcess, (LPVOID)addr, size, PAGE_EXECUTE_READWRITE, &oldProtect);
+    // Write the new instruction
+    WriteProcessMemory(this->hProcess, (LPVOID)addr, instruction, size, NULL);
+    // Restore the original protection
+    VirtualProtectEx(this->hProcess, (LPVOID)addr, size, oldProtect, &oldProtect);
+}
